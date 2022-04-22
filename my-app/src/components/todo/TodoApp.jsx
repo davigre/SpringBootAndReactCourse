@@ -10,7 +10,8 @@ class TodoApp extends Component {
                 <Router>
                     <Routes>
                         <Route path="/" exact element={<LoginComponent />} />
-                        <Route path="/login" exact element={<LoginComponent />} />
+                        {/* <Route path="/login" exact element={<LoginComponent />} /> */}
+                        <Route path="/login" element={<LoginComponentWithNavigation />} />
                         <Route path="/welcome" exact element={<WelcomeComponent />} />
                     </Routes>
                 </Router>
