@@ -1,19 +1,37 @@
 import React, {Component} from 'react'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 class TodoApp extends Component {
 
     render() {
+
         return (
             <div className="TodoApp">
-                <LoginComponenet/>
-
+                <Router>
+                    <Routes>
+                        <Route path="/" exact element={<LoginComponent />} />
+                        <Route path="/login" exact element={<LoginComponent />} />
+                        <Route path="/welcome" exact element={<WelcomeComponent />} />
+                    </Routes>
+                </Router>
             </div>
         )
+
     }
 
 }
 
-class LoginComponenet extends Component {
+class WelcomeComponent extends Component {
+
+    render() {
+
+        return <div>Welcome in28minutes</div>
+
+    }
+
+}
+
+class LoginComponent extends Component {
 
     constructor(props) {
 
@@ -69,27 +87,5 @@ class LoginComponenet extends Component {
         )
     }
 }
-
-// function ShowInvalidCredentials(props) {
-
-//     if(props.hasLoginFailed) {
-
-//         return <div>Invalid Credentials</div>
-
-//     }
-//     return null
-
-// }
-
-// function ShowLoginSuccessMsg(props) {
-
-//     if(props.showSuccesfullMsg) {
-
-//         return <div>Successful Login</div>
-
-//     }
-//     return null
-
-// }
 
 export default TodoApp;
