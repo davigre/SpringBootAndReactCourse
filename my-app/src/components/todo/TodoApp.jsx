@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import withNavigation from './WithNavigation'
 
 class TodoApp extends Component {
 
@@ -51,7 +52,6 @@ class LoginComponent extends Component {
 
     handleChange(event) {
 
-        console.log(event.target.name + ":" + event.target.value);
         this.setState({
             [event.target.name]: event.target.value
         })
@@ -62,12 +62,10 @@ class LoginComponent extends Component {
 
         if(this.state.username === 'in28minutes' && this.state.password === 'dummy') {
 
-            // console.log('Successful')
-            this.setState({showSuccesfullMsg: true, hasLoginFailed: false})
+            this.props.navigate("/welcome")
 
         } else {
-
-            // console.log('Fail')
+            
             this.setState({showSuccesfullMsg: false, hasLoginFailed: true})
 
         }
@@ -88,5 +86,7 @@ class LoginComponent extends Component {
         )
     }
 }
+
+const LoginComponentWithNavigation = withNavigation(LoginComponent);
 
 export default TodoApp;
