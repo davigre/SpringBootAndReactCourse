@@ -5,15 +5,14 @@ import withNavigation from './WithNavigation'
 class TodoApp extends Component {
 
     render() {
-
+        const LoginComponentWithNavigation = withNavigation(LoginComponent);
         return (
             <div className="TodoApp">
                 <Router>
                     <Routes>
-                        <Route path="/" exact element={<LoginComponent />} />
-                        {/* <Route path="/login" exact element={<LoginComponent />} /> */}
+                        <Route path="/" element={<LoginComponentWithNavigation />} />
                         <Route path="/login" element={<LoginComponentWithNavigation />} />
-                        <Route path="/welcome" exact element={<WelcomeComponent />} />
+                        <Route path="/welcome" element={<WelcomeComponent />} />
                     </Routes>
                 </Router>
             </div>
