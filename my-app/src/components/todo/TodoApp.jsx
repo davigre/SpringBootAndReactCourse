@@ -5,7 +5,7 @@ import withNavigation from './WithNavigation'
 class TodoApp extends Component {
 
     render() {
-        const LoginComponentWithNavigation = withNavigation(LoginComponent);
+        
         return (
             <div className="TodoApp">
                 <Router>
@@ -13,6 +13,7 @@ class TodoApp extends Component {
                         <Route path="/" element={<LoginComponentWithNavigation />} />
                         <Route path="/login" element={<LoginComponentWithNavigation />} />
                         <Route path="/welcome" element={<WelcomeComponent />} />
+                        <Route path="*" element={<ErrorComponent/>} />
                     </Routes>
                 </Router>
             </div>
@@ -29,6 +30,12 @@ class WelcomeComponent extends Component {
         return <div>Welcome in28minutes</div>
 
     }
+
+}
+
+function ErrorComponent() {
+
+    return <div>An error occurred. I don't know what to do</div>
 
 }
 
