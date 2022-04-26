@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
 import withNavigation from './WithNavigation'
 import withParams from './withParams'
 
@@ -32,9 +32,9 @@ class ListTodosComponent extends Component {
         super(props)
         this.state = {
             todos: [
-                {id: 0, description: 'Learn to Dance'},
-                {id: 1, description: 'Become Expert in React'},
-                {id: 2, description: 'Visit India'}
+                {id: 1, description: 'Learn to Dance', done:false, targetDate: new Date()},
+                {id: 2, description: 'Become Expert in React', done:false, targetDate: new Date()},
+                {id: 3, description: 'Visit India', done:false, targetDate: new Date()}
             ]
         }
 
@@ -48,15 +48,17 @@ class ListTodosComponent extends Component {
             <div><h1>List Todos</h1></div>
             <table>
                 <thead>
-                    <tr><th>Id</th><th>Description</th></tr>
+                    <tr><th>Id</th><th>Description</th><th>Is completed</th><th>target Date</th></tr>
                 </thead>
                 <tbody>
                     {
                         this.state.todos.map(
                             todo => 
-                                <tr>
+                                <tr key={todo.id}>
                                     <td>{todo.id}</td>
                                     <td>{todo.description}</td>
+                                    <td>{todo.done.toString()}</td>
+                                    <td>{todo.targetDate.toString()}</td>
                                 </tr>
                         )
                     }
@@ -73,7 +75,7 @@ class WelcomeComponent extends Component {
 
     render() {
 
-        return <div>Welcome {this.props.params.name}</div>
+        return <div>Welcome {this.props.params.name}, You can manage your todos <Link to="/todos">here</Link></div>
 
     }
 
