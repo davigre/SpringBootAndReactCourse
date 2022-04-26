@@ -9,6 +9,7 @@ class TodoApp extends Component {
 
         return (
             <div className="TodoApp">
+                <HeaderComponent/>
                 <Router>
                     <Routes>
                         <Route path="/" element={<LoginComponentWithNavigation />} />
@@ -18,7 +19,36 @@ class TodoApp extends Component {
                         <Route path="*" element={<ErrorComponent/>} />
                     </Routes>
                 </Router>
+                <FooterComponent/>
             </div>
+        )
+
+    }
+
+}
+
+class HeaderComponent extends Component {
+
+    render() {
+
+        return (
+
+            <div>header<hr/></div>
+
+        )
+
+    }
+
+}
+
+class FooterComponent extends Component {
+
+    render() {
+
+        return (
+
+            <div><hr/>Footer</div>
+
         )
 
     }
