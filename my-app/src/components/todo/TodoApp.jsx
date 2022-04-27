@@ -81,7 +81,7 @@ class LogoutComponent extends Component {
         return (
 
             <>
-                <h1>You are loged out</h1>
+                <h1>You are logged out</h1>
                 <div className='container'>
                     Thank You for using out application
                 </div>
@@ -114,24 +114,25 @@ class ListTodosComponent extends Component {
 
             <>
             <div><h1>List Todos</h1></div>
-            <table>
-                <thead>
-                    <tr><th>Id</th><th>Description</th><th>Is completed</th><th>target Date</th></tr>
-                </thead>
-                <tbody>
-                    {
-                        this.state.todos.map(
-                            todo => 
-                                <tr key={todo.id}>
-                                    <td>{todo.id}</td>
-                                    <td>{todo.description}</td>
-                                    <td>{todo.done.toString()}</td>
-                                    <td>{todo.targetDate.toString()}</td>
-                                </tr>
-                        )
-                    }
-                </tbody>
-            </table>
+            <div className='container'>
+                <table className='table'>
+                    <thead>
+                        <tr><th>Description</th><th>Is completed</th><th>Target Date</th></tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.todos.map(
+                                todo => 
+                                    <tr key={todo.id}>
+                                        <td>{todo.description}</td>
+                                        <td>{todo.done.toString()}</td>
+                                        <td>{todo.targetDate.toString()}</td>
+                                    </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+            </div>
             </>
 
         )
@@ -143,7 +144,16 @@ class WelcomeComponent extends Component {
 
     render() {
 
-        return <div>Welcome {this.props.params.name}, You can manage your todos <Link to="/todos">here</Link></div>
+        return (
+
+            <>
+                <h1>Welcome!</h1>    
+                <div className='container'>
+                    Welcome '{this.props.params.name}', You can manage your todos <Link to="/todos">here</Link>
+                </div>
+            </>
+
+        )
 
     }
 
@@ -197,13 +207,18 @@ class LoginComponent extends Component {
     render() {
         return (
             <>
+                <h1>Login</h1>
+                <div className='container'>
+
+                </div>
+
                 {/* <ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed} /> */}
                 {/* <ShowLoginSuccessMsg showLoginSuccessMsg={this.state.showSuccesfullMsg} /> */}
-                {this.state.hasLoginFailed && <div>Invalid Credentials</div>}
-                {this.state.showSuccesfullMsg && <div>Successful Login</div>}
+                {this.state.hasLoginFailed && <div className='alert alert-warning'>Invalid Credentials</div>}
+                {this.state.showSuccesfullMsg && <div>Login Successful</div>}
                 User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
                 Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                <button onClick={this.loginClicked}>Login</button>
+                <button className='btn' onClick={this.loginClicked}>Login</button>
             </>
         )
     }
