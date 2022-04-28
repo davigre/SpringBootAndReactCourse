@@ -7,6 +7,12 @@ class AuthenticationService {
 
     }
 
+    logout() {
+
+        sessionStorage.removeItem('authenticatedUser');
+
+    }
+
 }
 
 export default new AuthenticationService()

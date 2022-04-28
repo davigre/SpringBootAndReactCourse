@@ -45,7 +45,7 @@ class HeaderComponent extends Component {
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">
                         <li><Link className="nav-link" to="/login" >Login</Link></li>
-                        <li><Link className="nav-link" to="/logout" >Logout</Link></li>
+                        <li><Link className="nav-link" to="/logout" onClick={AuthenticationsService.logout}>Logout</Link></li>
                     </ul>
                 </nav>
 
