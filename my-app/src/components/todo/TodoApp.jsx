@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
 import withNavigation from './WithNavigation'
 import withParams from './withParams'
+import AuthenticationsService from './AuthenticationsService'
 
 class TodoApp extends Component {
 
@@ -193,6 +194,10 @@ class LoginComponent extends Component {
     loginClicked() {
 
         if(this.state.username === 'in28minutes' && this.state.password === 'dummy') {
+
+            console.log('pass')
+
+            AuthenticationsService.registerSuccessfulLogin(this.state.username, this.state.password);
 
             this.props.navigate(`/welcome/${this.state.username}`)
 
