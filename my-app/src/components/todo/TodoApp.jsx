@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
 import withNavigation from './WithNavigation'
 import withParams from './withParams'
 import AuthenticationsService from './AuthenticationsService'
+import AuthenticatedRoute from './AuthenticatedRoute'
 
 class TodoApp extends Component {
 
@@ -15,9 +16,21 @@ class TodoApp extends Component {
                     <Routes>
                         <Route path="/" element={<LoginComponentWithNavigation />} />
                         <Route path="/login" element={<LoginComponentWithNavigation />} />
-                        <Route path="/welcome/:name" element={<WelcomeComponentWithParams />} />
-                        <Route path="/todos" element={<ListTodosComponent />} />
-                        <Route path="/logout" element={<LogoutComponent />} />
+                        <Route path="/welcome/:name" element={
+                                <AuthenticatedRoute>
+                                    <WelcomeComponentWithParams />
+                                </AuthenticatedRoute>
+                            } />
+                        <Route path="/todos" element={
+                            <AuthenticatedRoute>
+                                <ListTodosComponent />
+                            </AuthenticatedRoute>
+                        } />
+                        <Route path="/logout" element={
+                            <AuthenticatedRoute>
+                                <LogoutComponent />
+                            </AuthenticatedRoute>
+                        } />
                         <Route path="*" element={<ErrorComponent/>} />
                     </Routes>
                     <FooterComponent/>
