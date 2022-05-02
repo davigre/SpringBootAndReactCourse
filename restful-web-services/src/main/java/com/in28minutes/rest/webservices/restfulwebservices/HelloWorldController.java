@@ -15,7 +15,8 @@ public class HelloWorldController {
     //method - "Hello World"
 
     @GetMapping(path = "/hello-world")
-    public String helloWorld() { 
+    public String helloWorld() {
+        
         return "Hello World";
 
     }
@@ -24,7 +25,7 @@ public class HelloWorldController {
     @GetMapping(path = "/hello-world-bean")
     public HelloWorldBean helloWorldBean() { 
 
-        return new HelloWorldBean("Hello World");
+        return new HelloWorldBean("Hello World Bean");
 
     }
 
