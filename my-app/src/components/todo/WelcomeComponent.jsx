@@ -12,6 +12,7 @@ class WelcomeComponent extends Component {
             welcomeMessage : ''
         }
         this.handleSuccesfulResponse = this.handleSuccessfulResponse.bind(this)
+        this.handleError = this.handleError.bind(this)
 
     }
 
@@ -47,7 +48,8 @@ class WelcomeComponent extends Component {
         //     .then(response => this.handleSuccessfulResponse(response));
 
         HelloWorldService.executeHelloWorldPathVariableService(this.props.params.name)
-            .then(response => this.handleSuccessfulResponse(response));
+            .then(response => this.handleSuccessfulResponse(response))
+            .catch(error => this.handleError(error));
 
     }
     
@@ -55,6 +57,13 @@ class WelcomeComponent extends Component {
 
         console.log(response)
         this.setState({welcomeMessage: response.data.message})
+
+    }
+
+    handleError(error) {
+        
+        console.log(error.response)
+        this.setState({welcomeMessage: error.response.data.message})
 
     }
 

@@ -1,5 +1,5 @@
 import { Component } from "react"
-import AuthenticationsService from "./AuthenticationsService"
+import AuthenticationService from "./AuthenticationService"
 
 class LoginComponent extends Component {
 
@@ -32,7 +32,7 @@ class LoginComponent extends Component {
 
             console.log('pass')
 
-            AuthenticationsService.registerSuccessfulLogin(this.state.username, this.state.password);
+            AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
 
             this.props.navigate(`/welcome/${this.state.username}`)
 

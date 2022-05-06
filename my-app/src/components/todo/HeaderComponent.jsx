@@ -1,12 +1,12 @@
 import { Component } from "react";
 import { Link } from 'react-router-dom'
-import AuthenticationsService from "./AuthenticationsService";
+import AuthenticationService from "./AuthenticationService";
 
 class HeaderComponent extends Component {
 
     render() {
 
-        const isUserLoggedIn = AuthenticationsService.isUserLoggedIn();
+        const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
         // console.log(isUserLoggedIn);
 
         return (
@@ -21,7 +21,7 @@ class HeaderComponent extends Component {
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">
                         {!isUserLoggedIn && <li><Link className="nav-link" to="/login" >Login</Link></li>}
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationsService.logout}>Logout</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
                     </ul>
                 </nav>
 
