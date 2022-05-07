@@ -6,18 +6,42 @@ class ListTodosComponent extends Component {
 
     constructor(props) {
 
+        console.log('constructor')
         super(props)
         this.state = {
-            todos: [
-                // {id: 1, description: 'Learn to Dance', done:false, targetDate: new Date()},
-                // {id: 2, description: 'Become Expert in React', done:false, targetDate: new Date()},
-                // {id: 3, description: 'Visit India', done:false, targetDate: new Date()}
-            ]
+            todos: [], 
+            message: null
         }
+
+        this.deleteTodoClicked = this.deleteTodoClicked.bind(this)
+        this.refreshTodos = this.refreshTodos.bind(this)
+
+    }
+
+    componentWillUnmount() {
+
+        console.log('componentWillUnmount')
+
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+
+        console.log('shouldComponentUpdate')
+        console.log(nextProps)
+        console.log(nextState)
+        return true
 
     }
 
     componentDidMount() {
+
+        console.log('componentDidMount')
+        this.refreshTodos()
+        console.log(this.state)
+
+    }
+
+    refreshTodos(){
 
         let username = AuthenticationService.getLoggedInUserName()
         console.log("componentDidMount: %s", username)
@@ -31,19 +55,34 @@ class ListTodosComponent extends Component {
                 }
             )
 
+    }
+
+    deleteTodoClicked(id) {
+
+        let username = AuthenticationService.getLoggedInUserName()
+
+        console.log('deleteTodoClicked: %s - %d', username, id)
+
+        TodoDataService.deleteTodo(username, id)
+            .then(response => {
+                this.setState({message: `Delete of todo ${id} was succesful`})
+                this.refreshTodos()
+            })
 
     }
 
     render() {
 
+        console.log('render')
         return (
 
             <>
             <div><h1>List Todos</h1></div>
+            {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
             <div className='container'>
                 <table className='table'>
                     <thead>
-                        <tr><th>Description</th><th>Is completed</th><th>Target Date</th></tr>
+                        <tr><th>Description</th><th>Is completed</th><th>Target Date</th><th>Delete</th></tr>
                     </thead>
                     <tbody>
                         {
@@ -53,6 +92,7 @@ class ListTodosComponent extends Component {
                                         <td>{todo.description}</td>
                                         <td>{todo.done.toString()}</td>
                                         <td>{todo.targetDate}</td>
+                                        <td><button className="btn btn-warning" onClick={() => this.deleteTodoClicked(todo.id)}>Delete</button></td>
                                     </tr>
                             )
                         }
