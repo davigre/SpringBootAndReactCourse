@@ -55,8 +55,6 @@ class TodoComponent extends Component {
 
     render() {
 
-        // let description = this.state.description;
-        // let targetDate = this.state.targetDate;
         let {description, targetDate} = this.state
 
         return (
@@ -73,7 +71,7 @@ class TodoComponent extends Component {
                         validateOnBlur = {false}
                     >
                         {
-                            (props) => (
+                            () => (
                                 <Form>
                                     <ErrorMessage name="description" component="div" className="alert alert-warning" />
                                     <ErrorMessage name="targetDate" component="div" className="alert alert-warning" />
@@ -92,7 +90,7 @@ class TodoComponent extends Component {
                     </Formik>
 
                 </div>
-                {/* Todo Component for id - {this.props.params.id} */}
+                
             </div>
         )
 
