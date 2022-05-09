@@ -14,6 +14,7 @@ class ListTodosComponent extends Component {
         }
 
         this.deleteTodoClicked = this.deleteTodoClicked.bind(this)
+        this.updateTodoClicked = this.updateTodoClicked.bind(this)
         this.refreshTodos = this.refreshTodos.bind(this)
 
     }
@@ -61,13 +62,21 @@ class ListTodosComponent extends Component {
 
         let username = AuthenticationService.getLoggedInUserName()
 
-        console.log('deleteTodoClicked: %s - %d', username, id)
+        console.log('deleteTodoClicked - username:%s, id:%d', username, id)
 
         TodoDataService.deleteTodo(username, id)
-            .then(response => {
+            .then(() => {
                 this.setState({message: `Delete of todo ${id} was succesful`})
                 this.refreshTodos()
             })
+
+    }
+
+    updateTodoClicked(id) {
+
+        console.log('updateTodoClicked - id:%d', id)
+
+        this.props.navigate(`/todos/${id}`)
 
     }
 
@@ -82,7 +91,7 @@ class ListTodosComponent extends Component {
             <div className='container'>
                 <table className='table'>
                     <thead>
-                        <tr><th>Description</th><th>Is completed</th><th>Target Date</th><th>Delete</th></tr>
+                        <tr><th>Description</th><th>Is completed</th><th>Target Date</th><th>Update</th><th>Delete</th></tr>
                     </thead>
                     <tbody>
                         {
@@ -92,6 +101,7 @@ class ListTodosComponent extends Component {
                                         <td>{todo.description}</td>
                                         <td>{todo.done.toString()}</td>
                                         <td>{todo.targetDate}</td>
+                                        <td><button className="btn btn-success" onClick={() => this.updateTodoClicked(todo.id)}>Update</button></td>
                                         <td><button className="btn btn-warning" onClick={() => this.deleteTodoClicked(todo.id)}>Delete</button></td>
                                     </tr>
                             )
