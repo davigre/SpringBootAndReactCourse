@@ -18,10 +18,17 @@ public class TodoResource {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/users/{username}/todos")
-    public List<Todo> getAllTodos(@PathVariable String username) throws InterruptedException {
-
-        // Thread.sleep(3000);
+    public List<Todo> getAllTodos(@PathVariable String username) {
+        
         return todoService.findAll();
+
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/users/{username}/todos/{id}")
+    public Todo getTodo(@PathVariable String username, @PathVariable long id) {
+
+        return todoService.findById(id);
 
     }
 
