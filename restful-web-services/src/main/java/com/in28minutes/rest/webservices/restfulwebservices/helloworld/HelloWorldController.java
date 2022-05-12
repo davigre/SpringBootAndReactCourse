@@ -14,6 +14,7 @@ public class HelloWorldController {
     //URI - /hello-world
     //method - "Hello World"
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/hello-world")
     public String helloWorld() {
 
@@ -22,6 +23,7 @@ public class HelloWorldController {
     }
 
     //hello-world-bean
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/hello-world-bean")
     public HelloWorldBean helloWorldBean() { 
 
@@ -30,6 +32,7 @@ public class HelloWorldController {
     }
 
     //hello-world-bean
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/hello-world-bean/path-variable/{name}")
     public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
 
