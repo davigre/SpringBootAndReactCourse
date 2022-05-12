@@ -14,7 +14,8 @@ class TodoComponent extends Component {
 
             id: this.props.params.id,
             description: '',
-            targetDate: moment(new Date()).format('YYYY-MM-DD')
+            targetDate: moment(new Date()).format('YYYY-MM-DD'),
+            done: false
 
         }
 
@@ -30,12 +31,13 @@ class TodoComponent extends Component {
         TodoDataService.retrieveTodo(username, this.state.id)
             .then(response => {
 
-                console.log(response)
+                console.log("retrieveTodo: ", response)
 
                 this.setState({
 
                     description: response.data.description,
-                    targetDate: moment(response.data.targetDate).format('YYYY-MM-DD')
+                    targetDate: moment(response.data.targetDate, moment.HTML5_FMT.DATETIME_LOCAL_MS).format('YYYY-MM-DD'),
+                    done: response.data.done
 
                 })
 
@@ -71,13 +73,23 @@ class TodoComponent extends Component {
 
     onSubmit(values) {
 
-       console.log("Submitting values:", values);
+        console.log("Submitting values:", values);
+
+        let username = AuthenticationService.getLoggedInUserName()
+
+        TodoDataService.updateTodo(username, this.state.id, {
+            id: this.state.id,
+            username: username,
+            description: values.description,
+            targetDate: values.targetDate,
+            done: values.done
+        }).then(() => this.props.navigate(`/todos`))
 
     }
 
     render() {
 
-        let {description, targetDate} = this.state
+        let {description, targetDate, done} = this.state
 
         return (
             <div>
@@ -86,7 +98,7 @@ class TodoComponent extends Component {
 
                     <Formik
                         // initialValues = {{description: description, targetDate: targetDate}}
-                        initialValues = {{description, targetDate}}
+                        initialValues = {{description, targetDate, done}}
                         onSubmit = {this.onSubmit}
                         validate = {this.validate}
                         validateOnChange = {false}
@@ -105,6 +117,10 @@ class TodoComponent extends Component {
                                     <fieldset className="form-group">
                                         <label>Target Date</label>
                                         <Field className="form-control" type="date" name="targetDate" />
+                                    </fieldset>
+                                    <fieldset className="form-group">
+                                        <label>Is Done?</label>
+                                        <Field className="form-control" type="checkbox" name="done" />
                                     </fieldset>
                                     <button type="submit" className="btn btn-success" >Save</button>
                                 </Form>
