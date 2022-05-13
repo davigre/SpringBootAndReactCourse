@@ -1,4 +1,4 @@
-package com.in28minutes.rest.webservices.restfulwebservices.basic;
+package com.in28minutes.rest.basic;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
