@@ -101,7 +101,7 @@ class ListTodosComponent extends Component {
             <div className='container'>
                 <table className='table'>
                     <thead>
-                        <tr><th>Description</th><th>Is completed</th><th>Target Date</th><th>Update</th><th>Delete</th></tr>
+                        <tr><th>Description</th><th>Target Date</th><th>Is completed</th><th>Update</th><th>Delete</th></tr>
                     </thead>
                     <tbody>
                         {
@@ -109,8 +109,8 @@ class ListTodosComponent extends Component {
                                 todo => 
                                     <tr key={todo.id}>
                                         <td>{todo.description}</td>
-                                        <td>{todo.done.toString()}</td>
                                         <td>{moment(todo.targetDate, moment.HTML5_FMT.DATETIME_LOCAL_MS).format('YYYY-MM-DD')}</td>
+                                        <td>{todo.done.toString()}</td>
                                         <td><button className="btn btn-success" onClick={() => this.updateTodoClicked(todo.id)}>Update</button></td>
                                         <td><button className="btn btn-warning" onClick={() => this.deleteTodoClicked(todo.id)}>Delete</button></td>
                                     </tr>
