@@ -28,12 +28,10 @@ class LoginComponent extends Component {
 
     loginClicked() {
 
-        AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
-                .then(() => {
+        AuthenticationService.executeJwtAuthenticationService(this.state.username, this.state.password)
+                .then((response) => {
 
-                    console.log('pass')
-
-                    AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+                    AuthenticationService.registerSuccessfulLoginForJWT(this.state.username, response.data.token);
                     this.props.navigate(`/welcome/${this.state.username}`)
 
                 }).catch(() => {

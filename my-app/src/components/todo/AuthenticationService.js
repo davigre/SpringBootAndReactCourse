@@ -2,6 +2,27 @@ import axios from "axios";
 
 class AuthenticationService {
 
+    createJWTtoken(token) {
+
+        return 'Bearer ' + token
+
+    }
+
+    executeJwtAuthenticationService(username, password) {
+
+        return axios.post(`http://localhost:8080/authenticate`, {username, password})
+
+    }
+
+    registerSuccessfulLoginForJWT(username, token) {
+
+        console.log('registerSuccessfulLoginJWT');
+        sessionStorage.setItem('authenticatedUser', username);
+
+        this.setupAxiosInterceptor(this.createJWTtoken(token))
+
+    }
+
     createBasicAuthToken(username, password) {
 
         return 'Basic ' + window.btoa(username + ":" + password)
@@ -52,7 +73,7 @@ class AuthenticationService {
 
     setupAxiosInterceptor(basicAuthHeader) {
 
-        console.log("basicAuthHeade:", basicAuthHeader)
+        console.log("basicAuthHeader: ", basicAuthHeader)
 
         axios.interceptors.request.use(
             (config) => {
